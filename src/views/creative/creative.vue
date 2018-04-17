@@ -98,27 +98,22 @@ export default {
       this.imageUrl = URL.createObjectURL(file.raw);
     },
     beforeAvatarUpload(file) {
-      const isJPG = file.type === 'image/jpeg';
       const isLt2M = file.size / 1024 / 1024 < 2;
-
-      if (!isJPG) {
-        this.$message.error('上传头像图片只能是 JPG 格式!');
-      }
       if (!isLt2M) {
         this.$message.error('上传头像图片大小不能超过 2MB!');
       }
-      return isJPG && isLt2M;
+      return isLt2M;
     }
   }
 }
 </script>
 
-<style>
+<style scoped>
   .add-creative{
     border-bottom: 1px solid #eee;
     padding: 12px 0;
   }
-  .el-submenu .el-menu-item {
+  .el-submenu .el-menu-item{
     min-width: 100%;
   }
   .avatar-uploader .el-upload {
@@ -143,5 +138,15 @@ export default {
     width: 178px;
     height: 178px;
     display: block;
+  }
+  .el-submenu__title{
+    display: none;
+  }
+  .el-row{
+    height:100%;
+    overflow-y: scroll;
+  }
+  .el-menu .el-menu-vertical-demo{
+    width:100%;
   }
 </style>

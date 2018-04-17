@@ -16,7 +16,9 @@
     <!-- 模糊搜索与状态查询 -->
     <el-row :gutter="24">
       <el-col :span="12">
-        <el-input v-model="input" placeholder="请输入关键字查询"></el-input>
+        <el-input placeholder="请输入关键字查询" v-model="input3">
+        <template slot="prepend">创意ID</template>
+      </el-input>
       </el-col>
       <el-col :span="12">
         <!-- 下拉框 -->
@@ -56,6 +58,7 @@ export default {
   data() {
     return {
       input: '',
+      input3: '',
       value1: ''
     }
   },
