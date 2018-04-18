@@ -48,26 +48,12 @@
       <el-row type="flex" class="row-bg" justify="space-between">
         <el-col :span="4">
           <div class="grid-content bg-purple">
-            <el-select v-model="value" placeholder="曝光量">
-              <el-option
-                v-for="item in options"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value">
-              </el-option>
-            </el-select>
+            <el-select title="曝光量"></el-select>
           </div>
         </el-col>
         <el-col :span="4">
           <div class="grid-content bg-purple">
-            <el-select v-model="value" placeholder="点击数">
-              <el-option
-                v-for="item in options"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value">
-              </el-option>
-            </el-select>
+            <el-select title="点击数"></el-select>
           </div>
         </el-col>
       </el-row>
@@ -80,34 +66,20 @@
 
 <script>
 import {init} from 'echarts'
+import elSelect from '../../components/ElSelect'
 export default {
   name: "home",
   data () {
     return {
-      options: [{
-        value: '选项1',
-        label: '黄金糕'
-      }, {
-        value: '选项2',
-        label: '双皮奶',
-        disabled: true
-      }, {
-        value: '选项3',
-        label: '蚵仔煎'
-      }, {
-        value: '选项4',
-        label: '龙须面'
-      }, {
-        value: '选项5',
-        label: '北京烤鸭'
-      }],
       value: '',
       startTime: '',
       endTime: '',
       xAxisList: [1,2,3,4,5],
-      seriesData: [],
       instance: null
     }
+  },
+  components: {
+    elSelect
   },
   mounted () {
     let graph = init(this.$refs.echarts)

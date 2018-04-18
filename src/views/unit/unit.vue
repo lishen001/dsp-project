@@ -21,7 +21,6 @@
       </el-input>
       </el-col>
       <el-col :span="12">
-        <!-- 下拉框 -->
         <el-select></el-select>
         <el-button type="info">查询</el-button>
       </el-col>
@@ -30,7 +29,6 @@
     <el-row :gutter="24" type="flex" justify="space-between">
       <el-col :span="12">
         <el-button type="primary" @click='toCreative'>+新建创意</el-button>
-        <!-- 下拉框 -->
         <el-select title='批量修改'></el-select>
       </el-col>
       <el-col :span="12">
@@ -39,7 +37,6 @@
           type="date"
           placeholder="请选择订单日期">
         </el-date-picker>
-        <!-- 下拉框 -->
         <el-select title='自定义列'></el-select>
       </el-col>
     </el-row>
@@ -79,7 +76,7 @@ export default {
     },
     toCreative() {
       this.$router.push({
-        name: 'newCreative'
+        path: '/create'
       })
     }
   }
