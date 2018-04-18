@@ -1,8 +1,8 @@
 import {login} from '../utils/request'
 let actions = {
-  getToken({commit}, {data, notify, router}) {
+  getToken ({commit}, {data, notify, router}) {
     login(data).then(res => {
-      if(res.status == 0){
+      if (res.status === 0) {
         commit('saveToken', res.token)
         commit('saveUser', res.user.name)
         localStorage.setItem('token', res.token)

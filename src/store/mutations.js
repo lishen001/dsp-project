@@ -1,8 +1,8 @@
 let mutations = {
-  saveToken(state, payload) {
+  saveToken (state, payload) {
     state.token = payload
   },
-  saveUser(state, payload) {
+  saveUser (state, payload) {
     state.username = payload
   }
 }

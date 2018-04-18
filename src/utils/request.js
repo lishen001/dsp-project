@@ -32,9 +32,9 @@ Object.defineProperty(Vue.prototype, '$http', {
 })
 export default instance
 
-export function login(loginInfo) {
+export function login (loginInfo) {
   return new Promise((resolve, reject) => {
-    instance.post('/dsp-admin/user/login',loginInfo).then(res => {
+    instance.post('/dsp-admin/user/login', loginInfo).then(res => {
       resolve(res)
     })
   })

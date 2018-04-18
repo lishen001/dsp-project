@@ -7,7 +7,7 @@
 <script>
 export default {
   name: 'dspTab',
-  mounted() {
+  mounted () {
     console.log(this.$slots)
   }
 }

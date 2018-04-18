@@ -68,13 +68,13 @@
 import {init} from 'echarts'
 import elSelect from '../../components/ElSelect'
 export default {
-  name: "home",
+  name: 'home',
   data () {
     return {
       value: '',
       startTime: '',
       endTime: '',
-      xAxisList: [1,2,3,4,5],
+      xAxisList: [1, 2, 3, 4, 5],
       instance: null
     }
   },
@@ -101,15 +101,15 @@ export default {
     graph.setOption(option)
   },
   watch: {
-    startTime(n) {
+    startTime () {
       this.getAllMonths(this.startTime, this.endTime)
     },
-    endTime(n) {
+    endTime () {
       this.getAllMonths(this.startTime, this.endTime)
     }
   },
   methods: {
-    test() {
+    test () {
       let that = this
       this.$http.post('/dsp-report/index', {
         count: that.xAxisList.length
@@ -132,28 +132,28 @@ export default {
         })
       })
     },
-    getAllMonths(start, end) {
+    getAllMonths (start, end) {
       this.xAxisList = []
-      if(start && end) {
+      if (start && end) {
         let startY = start.getFullYear(), // '开始的年份'
-            endY = end.getFullYear(), // '结束的年份'
-            startM = start.getMonth()+1, // '开始的月份'
-            endM = end.getMonth()+2 // '结束的月份'
-        while(new Date(startY, startM) < new Date(endY, endM)) {
-          if(startY < endY) {  // 跨年
-            if(startM <= 12) {
+          endY = end.getFullYear(), // '结束的年份'
+          startM = start.getMonth() + 1, // '开始的月份'
+          endM = end.getMonth() + 2 // '结束的月份'
+        while (new Date(startY, startM) < new Date(endY, endM)) {
+          if (startY < endY) { // 跨年
+            if (startM <= 12) {
               this.xAxisList.push(`${startY}/${startM}`)
               startM = startM + 1
             } else {
               startY = startY + 1
               startM = 1
             }
-          } else if(startY === endY) {  // 不跨年
-            if(startM <= endM) {
+          } else if (startY === endY) { // 不跨年
+            if (startM <= endM) {
               this.xAxisList.push(`${startY}/${startM}`)
             }
             startM = startM + 1
-          } else {  //
+          } else { //
             return
           }
         }

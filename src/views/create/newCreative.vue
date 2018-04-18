@@ -44,15 +44,15 @@ export default {
     dspTab,
     dspTabItem
   },
-  data() {
+  data () {
     return {
-      input: "",
+      input: '',
       flag: false,
       imageUrl: ''
     }
   },
-   methods: {
-    toCreate() {  // 显示弹出框
+  methods: {
+    toCreate () { // 显示弹出框
       this.$confirm('', '选择模板', {
         confirmButtonText: '多图',
         cancelButtonText: '单图',
@@ -62,17 +62,17 @@ export default {
       }).catch(() => {
         console.log('单图')
         this.flag = true
-      });
+      })
     },
-    handleAvatarSuccess(res, file) {
-      this.imageUrl = URL.createObjectURL(file.raw);
+    handleAvatarSuccess (res, file) {
+      this.imageUrl = URL.createObjectURL(file.raw)
     },
-    beforeAvatarUpload(file) {
-      const isLt2M = file.size / 1024 / 1024 < 2;
+    beforeAvatarUpload (file) {
+      const isLt2M = file.size / 1024 / 1024 < 2
       if (!isLt2M) {
-        this.$message.error('上传头像图片大小不能超过 2MB!');
+        this.$message.error('上传头像图片大小不能超过 2MB!')
       }
-      return isLt2M;
+      return isLt2M
     }
   }
 }

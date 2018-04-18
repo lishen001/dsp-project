@@ -16,7 +16,7 @@ const checkLoginStatus = () => {
 router.beforeEach((to, from, next) => {
   let isLogin = checkLoginStatus()
   // console.log(to)
-  if (to.name == 'login') {
+  if (to.name === 'login') {
     next()
   } else {
     if (!isLogin) {

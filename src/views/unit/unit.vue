@@ -52,7 +52,7 @@ import elTable from '../../components/ElTable'
 import elPagination from '../../components/ElPagination'
 import elSelect from '../../components/ElSelect'
 export default {
-  data() {
+  data () {
     return {
       input: '',
       input3: '',
@@ -65,16 +65,16 @@ export default {
     elPagination
   },
   methods: {
-    toggleSelection(rows) {
+    toggleSelection (rows) {
       if (rows) {
         rows.forEach(row => {
-          this.$refs.multipleTable.toggleRowSelection(row);
-        });
+          this.$refs.multipleTable.toggleRowSelection(row)
+        })
       } else {
-        this.$refs.multipleTable.clearSelection();
+        this.$refs.multipleTable.clearSelection()
       }
     },
-    toCreative() {
+    toCreative () {
       this.$router.push({
         path: '/create'
       })
