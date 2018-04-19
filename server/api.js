@@ -1,51 +1,19 @@
 const jwt = require('jsonwebtoken')
-const http = require('http')
-const querystring = require('querystring')
 const fs = require('fs')
 const Mock = require('mockjs')
-const _ = require('lodash')
-function queryApi (url, methods, params) {
-  return new Promise((resolve, reject) => {
-    let data = ''
-    const options = {
-      hostname: 'http://locahost:9000',
-      port: 80,
-      path: url,
-      method: methods,
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
-      }
-    }
-    let request = http.request(options, response => {
-      response.setEncoding('utf8')
-      response.on('data', chunk => {
-        data += chunk
-      })
-      response.on('end', () => {
-        resolve(JSON.stringify(data))
-      })
-    })
-    if (methods.toLowerCase() === 'post') {
-      request.write(querystring.stringify(params))
-    }
-    request.end()
-  })
-}
+const multer = require('multer')
+let storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './uploads')
+  },
+  filename: function (req, file, cb) {
+    // console.log(file)
+    let filename = file.originalname.split('.')
+    cb(null, filename[0] + '-' + Date.now() + '.' + filename[1])
+  }
+})
+let upload = multer({ storage: storage })
 module.exports = function (app) {
-  // 注册接口
-  // app.post('/user/register', function (req, res) {
-  //   let user = fs.readFileSync('user.json', { encoding: 'utf-8' })
-  //   user = JSON.parse(user)
-  //   user.push(req.body)
-  //   fs.writeFile('user.json', JSON.stringify(user), function () {
-  //     res.end(
-  //       JSON.stringify({
-  //         success: 1,
-  //         info: 'register success'
-  //       })
-  //     )
-  //   })
-  // })
   // login api
   app.post('/dsp-admin/user/login', function (req, res) {
     let user = fs.readFileSync(`${__dirname}/user.json`, { encoding: 'utf-8' })
@@ -77,7 +45,6 @@ module.exports = function (app) {
   })
   // home graph
   app.post('/dsp-report/index', function (req, res) {
-    // let { startTime, endTime, dimLeft, dimRight } = req.body
     let Random = Mock.Random
     let mockData = Mock.mock({
       'status': 0,
@@ -93,5 +60,16 @@ module.exports = function (app) {
       }
     })
     res.send(mockData)
+  })
+  // upload 上传接口
+  app.post('/dsp-creative/creative/upload', upload.single('file'), function (req, res) {
+    res.send({
+      'data': {
+        'size': req.file.size,
+        'value': req.file.path,
+        'key': '2A36B67C6'
+      },
+      'status': 0
+    })
   })
 }

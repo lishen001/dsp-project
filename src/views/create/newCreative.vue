@@ -15,22 +15,12 @@
     </el-col>
     <h4>上传创意</h4>
     <el-col :span="24" class="add-creative">
-      <span @click="toCreate">+添加创意</span>
       <!-- 上传图片 -->
-      <dsp-tab>
-        <dsp-tab-item></dsp-tab-item>
+      <dsp-tab :tabData="tabData" :editable="true" @edit="editFunc">
+        <dsp-tab-item v-for="x in tabData" :slot="x.name" :key="x.name">
+          <uploader></uploader>
+        </dsp-tab-item>
       </dsp-tab>
-      <el-col :span="24" v-if='flag'>
-        <el-upload
-          class="avatar-uploader"
-          action="https://jsonplaceholder.typicode.com/posts/"
-          :show-file-list="false"
-          :on-success="handleAvatarSuccess"
-          :before-upload="beforeAvatarUpload">
-          <img v-if="imageUrl" :src="imageUrl" class="avatar">
-          <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-        </el-upload>
-      </el-col>
     </el-col>
     <el-button type="info" plain>提交</el-button>
   </el-col>
@@ -39,16 +29,28 @@
 <script>
 import dspTab from '@/components/dsp-tab'
 import dspTabItem from '@/components/dsp-tab-item'
+import uploader from './uploader'
 export default {
   components: {
     dspTab,
-    dspTabItem
+    dspTabItem,
+    uploader
   },
   data () {
     return {
       input: '',
       flag: false,
-      imageUrl: ''
+      imageUrl: '',
+      isShow: false,
+      isOrigin: false,
+      activeName: "first",
+      len:1,
+      tabData:[
+        {
+          label:'创意1',
+          name:'tab-content-1'
+        }
+      ]
     }
   },
   methods: {
@@ -73,6 +75,30 @@ export default {
         this.$message.error('上传头像图片大小不能超过 2MB!')
       }
       return isLt2M
+    },
+    cb(e){
+      let FD = new FormData()
+      let file = e.target.files[0]
+          FD.append("file",file)
+      this.$http.post('http://localhost:9000/dsp-creative/creative/upload',FD).then(res=>{
+        console.log(res)
+      })
+    },
+    editFunc(){
+      this.tabData.push({
+        label:"创意"+(++this.len),
+        name:'tab-content-'+this.len
+      })
+    },
+    newTab() {
+      console.log(123)
+    },
+    fn(data) {
+      console.log(data)
+    },
+    handleEdit(target, action) {
+      console.log(target)
+      console.log(action)
     }
   }
 }
