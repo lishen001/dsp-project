@@ -122,7 +122,7 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 ```
 ## 项目流程图
 
-https://raw.githubusercontent.com/lishen001/dsp-project/master/dsp%E9%A1%B9%E7%9B%AE%E6%B5%81%E7%A8%8B%E5%9B%BE.png
+![Image text](https://raw.githubusercontent.com/lishen001/dsp-project/master/dsp%E9%A1%B9%E7%9B%AE%E6%B5%81%E7%A8%8B%E5%9B%BE.png)
 
 ## 项目总结
 
@@ -240,8 +240,7 @@ mutation都有一个字符串类型的事件类型(type)和回调函数(handler)
 ### 遇到的困难，以及解决方式 （自定义组件）
 
 1. 在添加用户信息，上传图片的时候遇到了一些问题，用自己封装的组件，以及一些逻辑的判断解决了这个问题。
-
-  所以一些第三方插件极大的方便了项目的实施以及构建，但并不能解决全部的问题，需要利用自己的专业技能做出更好的理解和判断才能解决最终的问题。
+所以一些第三方插件极大的方便了项目的实施以及构建，但并不能解决全部的问题，需要利用自己的专业技能做出更好的理解和判断才能解决最终的问题。
 
 2. 在使用vuex的时候需要解决异步的问题，所以利用vuex的action解决了异步的问题，但是在子父传参的时候遇到一个问题，就是在父组件定义了变量，将vuex返回的数据直接赋给了变量，然后将动态变量传递到子组件的时候会出现数据获取不到的情况，有时候刷新页面会显示出来，解决的办法就是直接将vuex的数据赋给动态变量然后解决了问题。
 
